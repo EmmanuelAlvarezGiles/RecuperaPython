@@ -85,6 +85,7 @@ def guardar_datos():
     with open(ARCHIVO_JSON, "w") as archivo:
         json.dump(dispositivos, archivo, indent=4)
 
+
 @app.route('/dispositivos_html')
 def ver_html():
     pagina_html = """
@@ -134,6 +135,22 @@ def agregar_dispositivo():
     
     guardar_datos()
     return "Dispositivo agregado correctamente", 201
+
+
+@app.route('/dispositivos/<identificador>', methods=['PUT'])
+def modificar_dispositivo(identificador):
+    if identificador not in dispositivos:
+        return "No existe un dispositivo con ese ID", 404
+    
+    datos = request.get_json()
+    
+    if 'nombre' in datos:
+        dispositivos[identificador]['nombre'] = datos['nombre']
+    if 'ip' in datos:
+        dispositivos[identificador]['ip'] = datos['ip']
+    
+    guardar_datos()
+    return "Dispositivo modificado correctamente", 200
 
    
 if __name__ == '__main__':

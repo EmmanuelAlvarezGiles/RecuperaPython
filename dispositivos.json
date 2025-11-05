@@ -1,0 +1,26 @@
+{
+    "router01": {
+        "id": "router01",
+        "nombre": "Router Principal",
+        "descripcion": "Router de borde principal de la red",
+        "ip": "192.168.1.1",
+        "tipo": "Router",
+        "otros": ""
+    },
+    "switch01": {
+        "id": "switch01",
+        "nombre": "Switch Principal",
+        "descripcion": "Switch de distribución en el edificio A",
+        "ip": "192.168.1.2",
+        "tipo": "Switch",
+        "otros": ""
+    },
+    "servidor01": {
+        "id": "servidor01",
+        "nombre": "Servidor Web",
+        "descripcion": "Servidor que aloja las aplicaciones internas",
+        "ip": "192.168.1.10",
+        "tipo": "Servidor",
+        "otros": ""
+    }
+}

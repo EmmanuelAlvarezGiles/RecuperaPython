@@ -71,6 +71,18 @@ from flask import Flask, jsonify, render_template_string, request, redirect, url
 
 app = Flask(__name__)
 
+ARCHIVO_JSON = "dispositivos.json"
+
+if os.path.exists(ARCHIVO_JSON):
+    with open(ARCHIVO_JSON, "r") as archivo:
+        dispositivos = json.load(archivo)
+else:
+    dispositivos = {}
+
+def guardar_datos():
+    with open(ARCHIVO_JSON, "w") as archivo:
+        json.dump(dispositivos, archivo, indent=4)
+
 @app.route('/', methods=['GET'])
 def test():
    return "Hola mundo"

@@ -10,7 +10,7 @@
     "switch01": {
         "id": "switch01",
         "nombre": "Switch Principal",
-        "descripcion": "Switch de distribución en el edificio A",
+        "descripcion": "Switch de distribuci\u00f3n en el edificio A",
         "ip": "192.168.1.2",
         "tipo": "Switch",
         "otros": ""
@@ -21,6 +21,14 @@
         "descripcion": "Servidor que aloja las aplicaciones internas",
         "ip": "192.168.1.10",
         "tipo": "Servidor",
+        "otros": ""
+    },
+    "switch02": {
+        "id": "switch02",
+        "nombre": "Switch de Laboratorio",
+        "descripcion": "Switch ubicado en el laboratorio de redes",
+        "ip": "192.168.1.20",
+        "tipo": "Switch",
         "otros": ""
     }
 }

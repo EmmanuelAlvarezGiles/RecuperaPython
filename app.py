@@ -110,6 +110,31 @@ def ver_html():
         """
     
     return pagina_html
+
+
+@app.route('/dispositivos', methods=['POST'])
+def agregar_dispositivo():
+    datos = request.get_json()
+    identificador = datos.get('id')
+
+    if not identificador:
+        return "Falta el campo 'id'", 400
+    
+    if identificador in dispositivos:
+        return "Ya existe un dispositivo con ese ID", 400
+    
+    dispositivos[identificador] = {
+        "id": identificador,
+        "nombre": datos.get('nombre', ''),
+        "descripcion": datos.get('descripcion', ''),
+        "ip": datos.get('ip', ''),
+        "tipo": datos.get('tipo', ''),
+        "otros": ""
+    }
+    
+    guardar_datos()
+    return "Dispositivo agregado correctamente", 201
+
    
 if __name__ == '__main__':
     app.run(debug=True)

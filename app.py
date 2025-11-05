@@ -68,6 +68,8 @@ la formula es la siguente:
 
 """
 from flask import Flask, jsonify, render_template_string, request, redirect, url_for
+import os
+import json
 
 app = Flask(__name__)
 
@@ -83,9 +85,31 @@ def guardar_datos():
     with open(ARCHIVO_JSON, "w") as archivo:
         json.dump(dispositivos, archivo, indent=4)
 
-@app.route('/', methods=['GET'])
-def test():
-   return "Hola mundo"
+@app.route('/dispositivos_html')
+def ver_html():
+    pagina_html = """
+    <style>
+        .dispositivo { border:1px solid #ccc; padding:10px; margin:10px; border-radius:5px; background-color:white; }
+        body { font-family: Arial; background-color:#f4f4f4; }
+    </style>
+    <h1>Listado de Dispositivos</h1>
+    """
+    
+    for dispositivo in dispositivos.values():
+        partes_ip = dispositivo['ip'].split('.')
+        ultimo_octeto = int(partes_ip[-1]) if len(partes_ip) == 4 else 0
+        formula = f"{ultimo_octeto * 3 + len(dispositivo['nombre'])}:{dispositivo['nombre'].replace(' ', '_')}"
+        
+        pagina_html += f"""
+        <div class='dispositivo'>
+            <h3>{dispositivo['nombre']}</h3>
+            <p><strong>IP:</strong> {dispositivo['ip']}</p>
+            <p><strong>Tipo:</strong> {dispositivo['tipo']}</p>
+            <p><strong>Fórmula:</strong> {formula}</p>
+        </div>
+        """
+    
+    return pagina_html
    
 if __name__ == '__main__':
     app.run(debug=True)
